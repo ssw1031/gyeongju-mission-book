@@ -9,7 +9,11 @@ GJ.KEY = {
 };
 GJ.TEACHER_PW = "0989"; // 교사 비밀번호(요청: UI에 보이지 않게)
 GJ.getCfg = function(){
-  try{ return JSON.parse(localStorage.getItem(GJ.KEY.CFG)||"{}"); }catch(e){ return {}; }
+  const DEFAULT = {
+    firebaseUrl: "https://gyeongju-mission-default-rtdb.asia-southeast1.firebasedatabase.app",
+    sheetsUrl: ""
+  };
+  try{ return { ...DEFAULT, ...JSON.parse(localStorage.getItem(GJ.KEY.CFG)||"{}") }; }catch(e){ return DEFAULT; }
 };
 GJ.setCfg = function(obj){
   const cur = GJ.getCfg();
